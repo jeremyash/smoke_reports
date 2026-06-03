@@ -1,84 +1,107 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Smoke Reports</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Prescribed Fire Smoke Reports</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f3f6f8;
+  color: #1f2d3a;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero {
+  background: linear-gradient(90deg, #032B5B 0%, #0B3D73 100%);
+  color: white;
+  border-left: 8px solid #F28C28;
+  border-radius: 16px;
+  padding: 24px 30px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 38px;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: rgba(255,255,255,0.88);
+  font-size: 17px;
+}
+
+.card {
+  margin-top: 24px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #d8e0e6;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #032B5B;
+}
+
+.empty {
+  color: #666;
+  font-style: italic;
+}
+
+.footer {
+  margin-top: 24px;
+  font-size: 13px;
+  color: #777;
+}
+</style>
 </head>
+
 <body>
-  <h1>Smoke Reports</h1>
-  <ul>
-      <li><a href='reports/20260426-132533-columbia-river-gorge-national-scenic-area-test.html' target='_blank'>Columbia River Gorge National Scenic Area - Test - 2026-04-26 13:25</a><br><span style='font-size:12px; color:#666;'>20260426-132533-columbia-river-gorge-national-scenic-area-test.html</span></li>
-    <li><a href='reports/20260426-164941-chattahoochee-oconee-national-forests-test.html' target='_blank'>Chattahoochee-Oconee National Forests - test - 2026-04-26 16:50</a><br><span style='font-size:12px; color:#666;'>20260426-164941-chattahoochee-oconee-national-forests-test.html</span></li>
-    <li><a href='reports/20260426-170257-bienville-national-forest-test.html' target='_blank'>Bienville National Forest - Test - 2026-04-26 17:03</a><br><span style='font-size:12px; color:#666;'>20260426-170257-bienville-national-forest-test.html</span></li>
-    <li><a href='reports/20260426-203502-cherokee-national-forest-test.html' target='_blank'>Cherokee National Forest - Test - 2026-04-26 20:35</a><br><span style='font-size:12px; color:#666;'>20260426-203502-cherokee-national-forest-test.html</span></li>
-    <li><a href='reports/20260426-212722-daniel-boone-national-forest-test.html' target='_blank'>Daniel Boone National Forest - test - 2026-04-26 21:27</a><br><span style='font-size:12px; color:#666;'>20260426-212722-daniel-boone-national-forest-test.html</span></li>
-    <li><a href='reports/20260426-215409-angelina-national-forest-test.html' target='_blank'>Angelina National Forest - test - 2026-04-26 21:54</a><br><span style='font-size:12px; color:#666;'>20260426-215409-angelina-national-forest-test.html</span></li>
-    <li><a href='reports/20260427-152808-angelina-national-forest-test.html' target='_blank'>Angelina National Forest - Test - 2026-04-27 15:28</a><br><span style='font-size:12px; color:#666;'>20260427-152808-angelina-national-forest-test.html</span></li>
-    <li><a href='reports/20260429-175117-chequamegon-nicolet-national-forest-test-hardwood-1.html' target='_blank'>Chequamegon-Nicolet National Forest - TEST Hardwood 1 - 2026-04-29 17:51</a><br><span style='font-size:12px; color:#666;'>20260429-175117-chequamegon-nicolet-national-forest-test-hardwood-1.html</span></li>
-    <li><a href='reports/20260429-175424-white-mountain-national-forest-test-moats-nmkl.html' target='_blank'>White Mountain National Forest - TEST Moats NMKL - 2026-04-29 17:54</a><br><span style='font-size:12px; color:#666;'>20260429-175424-white-mountain-national-forest-test-moats-nmkl.html</span></li>
-    <li><a href='reports/20260429-180216-chequamegon-nicolet-national-forest-merp.html' target='_blank'>Chequamegon-Nicolet National Forest - merp - 2026-04-29 18:02</a><br><span style='font-size:12px; color:#666;'>20260429-180216-chequamegon-nicolet-national-forest-merp.html</span></li>
-    <li><a href='reports/20260430-125016-allegheny-national-forest-test.html' target='_blank'>Allegheny National Forest - test - 2026-04-30 12:50</a><br><span style='font-size:12px; color:#666;'>20260430-125016-allegheny-national-forest-test.html</span></li>
-    <li><a href='reports/20260501-001216-national-forests-in-north-carolina-test.html' target='_blank'>National Forests in North Carolina - Test - 2026-05-01 00:12</a><br><span style='font-size:12px; color:#666;'>20260501-001216-national-forests-in-north-carolina-test.html</span></li>
-    <li><a href='reports/20260501-011856-angelina-national-forest-test.html' target='_blank'>Angelina National Forest - test - 2026-05-01 01:19</a><br><span style='font-size:12px; color:#666;'>20260501-011856-angelina-national-forest-test.html</span></li>
-    <li><a href='reports/20260501-011947-angelina-national-forest-test.html' target='_blank'>Angelina National Forest - test - 2026-05-01 01:20</a><br><span style='font-size:12px; color:#666;'>20260501-011947-angelina-national-forest-test.html</span></li>
-    <li><a href='reports/20260506-135105-daniel-boone-national-forest-hurricane-branch.html' target='_blank'>Daniel Boone National Forest - Hurricane Branch - 2026-05-06 13:51</a><br><span style='font-size:12px; color:#666;'>20260506-135105-daniel-boone-national-forest-hurricane-branch.html</span></li>
-    <li><a href='reports/20260506-141239-daniel-boone-national-forest-hurricn-branch.html' target='_blank'>Daniel Boone National Forest - Hurricn Branch - 2026-05-06 14:13</a><br><span style='font-size:12px; color:#666;'>20260506-141239-daniel-boone-national-forest-hurricn-branch.html</span></li>
-    <li><a href='reports/20260506-143412-daniel-boone-national-forest-hurricane-branch.html' target='_blank'>Daniel Boone National Forest - Hurricane Branch  - 2026-05-06 14:34</a><br><span style='font-size:12px; color:#666;'>20260506-143412-daniel-boone-national-forest-hurricane-branch.html</span></li>
-    <li><a href='reports/20260506-144949-daniel-boone-national-forest-test.html' target='_blank'>Daniel Boone National Forest - Test - 2026-05-06 14:50</a><br><span style='font-size:12px; color:#666;'>20260506-144949-daniel-boone-national-forest-test.html</span></li>
-    <li><a href='reports/20260506-150344-daniel-boone-national-forest-test.html' target='_blank'>Daniel Boone National Forest - test - 2026-05-06 15:04</a><br><span style='font-size:12px; color:#666;'>20260506-150344-daniel-boone-national-forest-test.html</span></li>
-    <li><a href='reports/20260506-153235-daniel-boone-national-forest-test.html' target='_blank'>Daniel Boone National Forest - Test - 2026-05-06 15:33</a><br><span style='font-size:12px; color:#666;'>20260506-153235-daniel-boone-national-forest-test.html</span></li>
-    <li><a href='reports/20260506-154955-daniel-boone-national-forest-test.html' target='_blank'>Daniel Boone National Forest - test - 2026-05-06 15:50</a><br><span style='font-size:12px; color:#666;'>20260506-154955-daniel-boone-national-forest-test.html</span></li>
-    <li><a href='reports/20260506-161159-daniel-boone-national-forest-test.html' target='_blank'>Daniel Boone National Forest - test - 2026-05-06 16:12</a><br><span style='font-size:12px; color:#666;'>20260506-161159-daniel-boone-national-forest-test.html</span></li>
-    <li><a href='reports/20260506-162544-chattahoochee-oconee-national-forests-tes.html' target='_blank'>Chattahoochee-Oconee National Forests - Tes - 2026-05-06 16:26</a><br><span style='font-size:12px; color:#666;'>20260506-162544-chattahoochee-oconee-national-forests-tes.html</span></li>
-    <li><a href='reports/20260506-165918-bienville-national-forest-test.html' target='_blank'>Bienville National Forest - test - 2026-05-06 17:00</a><br><span style='font-size:12px; color:#666;'>20260506-165918-bienville-national-forest-test.html</span></li>
-    <li><a href='reports/20260506-201852-daniel-boone-national-forest-testing.html' target='_blank'>Daniel Boone National Forest - Testing - 2026-05-06 20:19</a><br><span style='font-size:12px; color:#666;'>20260506-201852-daniel-boone-national-forest-testing.html</span></li>
-    <li><a href='reports/20260506-211856-daniel-boone-national-forest-testing.html' target='_blank'>Daniel Boone National Forest - testing - 2026-05-06 21:19</a><br><span style='font-size:12px; color:#666;'>20260506-211856-daniel-boone-national-forest-testing.html</span></li>
-    <li><a href='reports/20260506-dbnf-testing.html' target='_blank'>Daniel Boone National Forest - Testing - 2026-05-06 23:21</a><br><span style='font-size:12px; color:#666;'>20260506-dbnf-testing.html</span></li>
-    <li><a href='reports/20260506-dbnf-hurricane-branch.html' target='_blank'>Daniel Boone National Forest - Hurricane Branch - 2026-05-06 23:30</a><br><span style='font-size:12px; color:#666;'>20260506-dbnf-hurricane-branch.html</span></li>
-    <li><a href='reports/20260507-dbnf-rowan-is-a-punk.html' target='_blank'>Daniel Boone National Forest - Rowan is a punk - 2026-05-07 00:03</a><br><span style='font-size:12px; color:#666;'>20260507-dbnf-rowan-is-a-punk.html</span></li>
-    <li><a href='reports/20260507-dbnf-hurricane-branch.html' target='_blank'>Daniel Boone National Forest - Hurricane Branch - 2026-05-07 12:55</a><br><span style='font-size:12px; color:#666;'>20260507-dbnf-hurricane-branch.html</span></li>
-    <li><a href='reports/20260507-dbnf-hurricane-branch.html' target='_blank'>Daniel Boone National Forest - Hurricane Branch - 2026-05-07 14:38</a><br><span style='font-size:12px; color:#666;'>20260507-dbnf-hurricane-branch.html</span></li>
-    <li><a href='reports/20260507-dbnf-testing.html' target='_blank'>Daniel Boone National Forest - TESTING - 2026-05-07 15:14</a><br><span style='font-size:12px; color:#666;'>20260507-dbnf-testing.html</span></li>
-    <li><a href='reports/20260507-cnf-fyfk.html' target='_blank'>Croatan National Forest - fyfk - 2026-05-07 15:27</a><br><span style='font-size:12px; color:#666;'>20260507-cnf-fyfk.html</span></li>
-    <li><a href='reports/20260529-bnf-test.html' target='_blank'>Bienville National Forest - TEST - 2026-05-29 11:12</a><br><span style='font-size:12px; color:#666;'>20260529-bnf-test.html</span></li>
-    <li><a href='reports/20260529-con-test.html' target='_blank'>Chattahoochee-Oconee National Forests - test - 2026-05-29 16:02</a><br><span style='font-size:12px; color:#666;'>20260529-con-test.html</span></li>
-    <li><a href='reports/20260529-cnf-test.html' target='_blank'>Cherokee National Forest - test - 2026-05-29 16:12</a><br><span style='font-size:12px; color:#666;'>20260529-cnf-test.html</span></li>
-    <li><a href='reports/20260529-cnf-test.html' target='_blank'>Cherokee National Forest - test - 2026-05-29 16:20</a><br><span style='font-size:12px; color:#666;'>20260529-cnf-test.html</span></li>
-    <li><a href='reports/20260529-con-test.html' target='_blank'>Chattahoochee-Oconee National Forests - test - 2026-05-29 16:53</a><br><span style='font-size:12px; color:#666;'>20260529-con-test.html</span></li>
-    <li><a href='reports/20260529-con-test.html' target='_blank'>Chattahoochee-Oconee National Forests - test - 2026-05-29 17:04</a><br><span style='font-size:12px; color:#666;'>20260529-con-test.html</span></li>
-    <li><a href='reports/20260529-cnf-test.html' target='_blank'>Cherokee National Forest - test - 2026-05-29 17:21</a><br><span style='font-size:12px; color:#666;'>20260529-cnf-test.html</span></li>
-    <li><a href='reports/20260529-bnf-23a3-testing.html' target='_blank'>Bienville National Forest - testing - 2026-05-29 14:55</a><br><span style='font-size:12px; color:#666;'>20260529-bnf-23a3-testing.html</span></li>
-    <li><a href='reports/20260529-dnf-c530-tesiing.html' target='_blank'>Dixie National Forest - tesiing - 2026-05-29 15:02</a><br><span style='font-size:12px; color:#666;'>20260529-dnf-c530-tesiing.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-testing-again.html' target='_blank'>Chattahoochee-Oconee National Forests - testing again - 2026-05-29 19:19</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-testing-again.html</span></li>
-    <li><a href='reports/20260529-bnf-23a3-checking.html' target='_blank'>Bienville National Forest - checking - 2026-05-29 15:38</a><br><span style='font-size:12px; color:#666;'>20260529-bnf-23a3-checking.html</span></li>
-    <li><a href='reports/20260529-cnf-341f-checking.html' target='_blank'>Conecuh National Forest - checking - 2026-05-29 15:41</a><br><span style='font-size:12px; color:#666;'>20260529-cnf-341f-checking.html</span></li>
-    <li><a href='reports/20260529-cnf-341f-checking.html' target='_blank'>Conecuh National Forest - checking - 2026-05-29 15:42</a><br><span style='font-size:12px; color:#666;'>20260529-cnf-341f-checking.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-checking.html' target='_blank'>Chattahoochee-Oconee National Forests - checking - 2026-05-29 15:47</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-checking.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-checking.html' target='_blank'>Chattahoochee-Oconee National Forests - checking - 2026-05-29 15:59</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-checking.html</span></li>
-    <li><a href='reports/20260529-fwnf-1677-ajsh.html' target='_blank'>Fremont-Winema National Forest - ajsh - 2026-05-29 16:01</a><br><span style='font-size:12px; color:#666;'>20260529-fwnf-1677-ajsh.html</span></li>
-    <li><a href='reports/20260529-ctnf-7193-sdkfn.html' target='_blank'>Caribou-Targhee National Forest - sdkfn - 2026-05-29 16:04</a><br><span style='font-size:12px; color:#666;'>20260529-ctnf-7193-sdkfn.html</span></li>
-    <li><a href='reports/20260529-dnf-d244-sdkj.html' target='_blank'>Deschutes National Forest - sdkj - 2026-05-29 16:06</a><br><span style='font-size:12px; color:#666;'>20260529-dnf-d244-sdkj.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-check.html' target='_blank'>Chattahoochee-Oconee National Forests - check - 2026-05-29 16:15</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-check.html</span></li>
-    <li><a href='reports/20260529-anf-fc68-dslkfj.html' target='_blank'>Apalachicola National Forest - dslkfj - 2026-05-29 16:26</a><br><span style='font-size:12px; color:#666;'>20260529-anf-fc68-dslkfj.html</span></li>
-    <li><a href='reports/20260529-bnf-23a3-sldj.html' target='_blank'>Bienville National Forest - sldj - 2026-05-29 16:56</a><br><span style='font-size:12px; color:#666;'>20260529-bnf-23a3-sldj.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-sadlkfj.html' target='_blank'>Chattahoochee-Oconee National Forests - sadlkfj - 2026-05-29 17:06</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-sadlkfj.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-sadlkfj.html' target='_blank'>Chattahoochee-Oconee National Forests - sadlkfj - 2026-05-29 17:07</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-sadlkfj.html</span></li>
-    <li><a href='reports/20260529-onf-56a2-lsdjfkdja.html' target='_blank'>Ouachita National Forest - lsdjfkdja - 2026-05-29 17:19</a><br><span style='font-size:12px; color:#666;'>20260529-onf-56a2-lsdjfkdja.html</span></li>
-    <li><a href='reports/20260529-tnf-bec8-sdfasdf.html' target='_blank'>Talladega National Forest - sdfasdf - 2026-05-29 17:49</a><br><span style='font-size:12px; color:#666;'>20260529-tnf-bec8-sdfasdf.html</span></li>
-    <li><a href='reports/20260529-tnf-bec8-sdfasdf.html' target='_blank'>Talladega National Forest - sdfasdf - 2026-05-29 17:50</a><br><span style='font-size:12px; color:#666;'>20260529-tnf-bec8-sdfasdf.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-sdfdf.html' target='_blank'>Chattahoochee-Oconee National Forests - sDFdf - 2026-05-29 17:56</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-sdfdf.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-asldfj.html' target='_blank'>Chattahoochee-Oconee National Forests - asldfj - 2026-05-29 18:09</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-asldfj.html</span></li>
-    <li><a href='reports/20260529-fwnf-1677-jhkjhkhk.html' target='_blank'>Fremont-Winema National Forest - jhkjhkhk - 2026-05-29 18:23</a><br><span style='font-size:12px; color:#666;'>20260529-fwnf-1677-jhkjhkhk.html</span></li>
-    <li><a href='reports/20260529-conf-3b63-sdfa.html' target='_blank'>Chattahoochee-Oconee National Forests - sdfa - 2026-05-29 18:41</a><br><span style='font-size:12px; color:#666;'>20260529-conf-3b63-sdfa.html</span></li>
-    <li><a href='reports/20260529-nfia-c855-dfasdf.html' target='_blank'>National Forests in Alabama - dfasdf - 2026-05-29 19:26</a><br><span style='font-size:12px; color:#666;'>20260529-nfia-c855-dfasdf.html</span></li>
-    <li><a href='reports/20260529-cnf-37df-sfdasfg.html' target='_blank'>Croatan National Forest - sfdasfg - 2026-05-29 23:45</a><br><span style='font-size:12px; color:#666;'>20260529-cnf-37df-sfdasfg.html</span></li>
-    <li><a href='reports/20260530-shnf-7782-asdkfjal.html' target='_blank'>Sam Houston National Forest - asdkfjal - 2026-05-30 00:03</a><br><span style='font-size:12px; color:#666;'>20260530-shnf-7782-asdkfjal.html</span></li>
-    <li><a href='reports/20260530-nfit-ae17-sdfjhsdk.html' target='_blank'>National Forests in Texas - sdfjhsdk - 2026-05-30 00:12</a><br><span style='font-size:12px; color:#666;'>20260530-nfit-ae17-sdfjhsdk.html</span></li>
-    <li><a href='reports/20260529-nfim-edb4-asdfasdf.html' target='_blank'>National Forests in Mississippi - asdfasdf - 2026-05-29 20:40</a><br><span style='font-size:12px; color:#666;'>20260529-nfim-edb4-asdfasdf.html</span></li>
-    <li><a href='reports/20260602-conf-3b63-kjhkjhk.html' target='_blank'>Chattahoochee-Oconee National Forests - kjhkjhk - 2026-06-02 16:00</a><br><span style='font-size:12px; color:#666;'>20260602-conf-3b63-kjhkjhk.html</span></li>
-    <li><a href='reports/20260603-testing-nnf-aeba.html' target='_blank'>Nantahala National Forest - TESTING - 2026-06-03 13:08</a><br><span style='font-size:12px; color:#666;'>20260603-testing-nnf-aeba.html</span></li>
-    <li><a href='reports/20260603-checking-title-nnf-aeba.html' target='_blank'>Nantahala National Forest - checking title - 2026-06-03 13:29</a><br><span style='font-size:12px; color:#666;'>20260603-checking-title-nnf-aeba.html</span></li>
-    <li><a href='reports/20260603-pb-image-check-nnf-aeba.html' target='_blank'>Nantahala National Forest - pb image check - 2026-06-03 14:00</a><br><span style='font-size:12px; color:#666;'>20260603-pb-image-check-nnf-aeba.html</span></li>
-</ul>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>Prescribed Fire Smoke Reports</h1>
+    <p>
+      Smoke reports and PB Piedmont output generated through the
+      USDA Forest Service smoke reporting workflow.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Smoke Reports</h2>
+    <div id="report-list">
+      <p class="empty">
+        No reports available yet.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>PB Piedmont Output</h2>
+    <div id="pb-list">
+      <p class="empty">
+        No PB Piedmont maps available yet.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Generated reports are published automatically from the Smoke Report Generator.
+  </div>
+
+</div>
+
 </body>
 </html>
