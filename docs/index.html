@@ -69,6 +69,44 @@ body {
 .hero a:visited {
   color: white;
   font-weight: 700;
+  
+  .region-group {
+  margin-top: 18px;
+}
+
+.region-group h3 {
+  margin: 16px 0 8px 0;
+  padding: 6px 10px;
+  background: #EAF1F5;
+  color: #032B5B;
+  border-left: 5px solid #F28C28;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.report-entry {
+  margin: 8px 0 10px 14px;
+}
+
+.report-entry a {
+  color: #032B5B;
+  font-weight: 700;
+}
+
+.entry-meta {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #666;
+}
+
+.recent-entry {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5eaee;
+}
+
+.recent-entry:last-child {
+  border-bottom: none;
+}
 }
 </style>
 </head>
@@ -85,6 +123,13 @@ body {
     Prescribed Fire Smoke Report Tool
   </a>.
     </p>
+  </div>
+  
+  <div class="card">
+    <h2>Recent Activity</h2>
+    <div id="recent-activity">
+      <p class="empty">No recent activity yet.</p>
+    </div>
   </div>
 
   <div class="card">
@@ -113,6 +158,101 @@ body {
   </div>
 
 </div>
+
+<script>
+function getEntries(containerId, productLabel) {
+  const container = document.getElementById(containerId);
+  if (!container) return [];
+
+  return Array.from(container.querySelectorAll(".report-entry")).map(entry => {
+    const link = entry.querySelector("a");
+
+    return {
+      html: entry.outerHTML,
+      href: link ? link.getAttribute("href") : "",
+      label: link ? link.textContent.trim() : "",
+      region: entry.dataset.region || "Unknown Region",
+      issued: entry.dataset.issued || "",
+      product: productLabel
+    };
+  });
+}
+
+function organizeEntriesByRegion(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const entries = Array.from(container.querySelectorAll(".report-entry"));
+
+  if (entries.length === 0) return;
+
+  const grouped = {};
+
+  entries.forEach(entry => {
+    const region = entry.dataset.region || "Unknown Region";
+    const issued = entry.dataset.issued || "";
+
+    if (!grouped[region]) grouped[region] = [];
+
+    grouped[region].push({
+      issued: issued,
+      html: entry.outerHTML
+    });
+  });
+
+  const regions = Object.keys(grouped).sort();
+
+  let html = "";
+
+  regions.forEach(region => {
+    grouped[region].sort((a, b) => b.issued.localeCompare(a.issued));
+
+    html += "<div class='region-group'>";
+    html += "<h3>" + region + "</h3>";
+
+    grouped[region].forEach(item => {
+      html += item.html;
+    });
+
+    html += "</div>";
+  });
+
+  container.innerHTML = html;
+}
+
+function buildRecentActivity() {
+  const recent = document.getElementById("recent-activity");
+  if (!recent) return;
+
+  const reports = getEntries("report-list", "Smoke Report");
+  const pbMaps = getEntries("pb-list", "PB Piedmont");
+
+  const allEntries = reports.concat(pbMaps);
+
+  if (allEntries.length === 0) return;
+
+  allEntries.sort((a, b) => b.issued.localeCompare(a.issued));
+
+  let html = "";
+
+  allEntries.forEach(item => {
+    html += "<div class='report-entry recent-entry' data-region='" + item.region + "' data-issued='" + item.issued + "'>";
+    html += "<a href='" + item.href + "' target='_blank'>";
+    html += item.label;
+    html += "</a>";
+    html += "<div class='entry-meta'>" + item.product + " • " + item.region + "</div>";
+    html += "</div>";
+  });
+
+  recent.innerHTML = html;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  organizeEntriesByRegion("report-list");
+  organizeEntriesByRegion("pb-list");
+  buildRecentActivity();
+});
+</script>
 
 </body>
 </html>
