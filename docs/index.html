@@ -1,310 +1,274 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Prescribed Fire Smoke Reports</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f3f6f8;
-  color: #1f2d3a;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px;
-}
-
-.hero {
-  background: linear-gradient(90deg, #032B5B 0%, #0B3D73 100%);
-  color: white;
-  border-left: 8px solid #F28C28;
-  border-radius: 16px;
-  padding: 24px 30px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.18);
-}
-
-.hero h1 {
-  margin: 0;
-  font-size: 38px;
-}
-
-.hero p {
-  margin-top: 10px;
-  color: rgba(255,255,255,0.88);
-  font-size: 17px;
-}
-
-.card {
-  margin-top: 24px;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #d8e0e6;
-  padding: 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.card h2 {
-  margin-top: 0;
-  color: #032B5B;
-}
-
-.empty {
-  color: #666;
-  font-style: italic;
-}
-
-.footer {
-  margin-top: 24px;
-  font-size: 13px;
-  color: #777;
-}
-
-.hero a,
-.hero a:visited {
-  color: white;
-  font-weight: 700;
-  
-  .region-group {
-  margin-top: 18px;
-}
-
-.region-group h3 {
-  margin: 16px 0 8px 0;
-  padding: 6px 10px;
-  background: #EAF1F5;
-  color: #032B5B;
-  border-left: 5px solid #F28C28;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-.report-entry {
-  margin: 8px 0 10px 14px;
-}
-
-.report-entry a {
-  color: #032B5B;
-  font-weight: 700;
-}
-
-.entry-meta {
-  margin-top: 3px;
-  font-size: 12px;
-  color: #666;
-}
-
-.recent-entry {
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e5eaee;
-}
-
-.recent-entry:last-child {
-  border-bottom: none;
-}
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="hero">
-    <h1>Prescribed Fire Smoke Reports</h1>
-    <p>
-  Smoke reports and PB Piedmont output generated from the
-  <a href="https://r8-arm.shinyapps.io/smoker/" target="_blank">
-    Prescribed Fire Smoke Report Tool
-  </a>.
-    </p>
-  </div>
-  
-  <div class="card">
-    <h2>Recent Activity</h2>
-    <div id="recent-activity">
-      <p class="empty">No recent activity yet.</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Smoke Reports</h2>
-    <div id="report-list">
-      <!-- ===== BEGIN AUTO-GENERATED SMOKE REPORT LINKS ===== -->
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T15:43:00'>
-      <a href='reports/20260604-test-delete-me-conf-3b63-i1543.html' target='_blank'>2026-06-04 15:43 - Chattahoochee-Oconee National Forests - TEST - Delete me</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T15:41:15'>
-      <a href='reports/20260604-test-delete-me-conf-3b63-i1541.html' target='_blank'>2026-06-04 15:41 - Chattahoochee-Oconee National Forests - TEST - Delete me</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T15:34:55'>
-      <a href='reports/20260604-pace-onf-966d-i1534.html' target='_blank'>2026-06-04 15:34 - Ocala National Forest - Pace</a>
-    </div>
-
-    <div class='report-entry' data-region='R09' data-issued='2026-06-04T13:37:16'>
-      <a href='reports/20260604-r9-test-hnf-11d4-i1337.html' target='_blank'>2026-06-04 13:37 - Hiawatha National Forest - R9 Test</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T13:03:35'>
-      <a href='reports/20260604-testing-with-zip-again-nnf-aeba-i1303.html' target='_blank'>2026-06-04 13:03 - Nantahala National Forest - Testing with zip-again</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T12:49:05'>
-      <a href='reports/20260604-testing-report-with-zip-nnf-aeba-i1249.html' target='_blank'>2026-06-04 12:49 - Nantahala National Forest - Testing Report With Zip</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T12:47:26'>
-      <a href='reports/20260604-testing-report-no-zip-nnf-aeba-i1247.html' target='_blank'>2026-06-04 12:47 - Nantahala National Forest - Testing Report No Zip</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T12:45:24'>
-      <a href='reports/20260604-testing-report-nnf-aeba-i1245.html' target='_blank'>2026-06-04 12:45 - Nantahala National Forest - Testing Report</a>
-    </div>
-
-      
-      <!-- ===== END AUTO-GENERATED SMOKE REPORT LINKS ===== -->
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>PB Piedmont Output</h2>
-    <div id="pb-list">
-      <!-- ===== BEGIN AUTO-GENERATED PB PIEDMONT LINKS ===== -->
-    <div class='report-entry' data-region='R08' data-issued='2026-06-10T21:59:43'>
-      <a href='pb-piedmont/20260610-arrow-testing-nnf-aeba-i2159-pb-piedmont.html' target='_blank'>2026-06-10 21:59 - Nantahala National Forest - arrow testing</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T15:43:00'>
-      <a href='pb-piedmont/20260604-test-delete-me-conf-3b63-i1543-pb-piedmont.html' target='_blank'>2026-06-04 15:43 - Chattahoochee-Oconee National Forests - TEST - Delete me</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T15:41:15'>
-      <a href='pb-piedmont/20260604-test-delete-me-conf-3b63-i1541-pb-piedmont.html' target='_blank'>2026-06-04 15:41 - Chattahoochee-Oconee National Forests - TEST - Delete me</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T13:07:03'>
-      <a href='pb-piedmont/20260604-testing-pb-only-nnf-aeba-i1307-pb-piedmont.html' target='_blank'>2026-06-04 13:07 - Nantahala National Forest - Testing PB Only</a>
-    </div>
-
-    <div class='report-entry' data-region='R08' data-issued='2026-06-04T13:03:35'>
-      <a href='pb-piedmont/20260604-testing-with-zip-again-nnf-aeba-i1303-pb-piedmont.html' target='_blank'>2026-06-04 13:03 - Nantahala National Forest - Testing with zip-again</a>
-    </div>
-
-      
-      <!-- ===== END AUTO-GENERATED PB PIEDMONT LINKS ===== -->
-    </div>
-  </div>
-
-   <div class="footer">
-    Generated reports are published automatically from the
-    <a href="https://r8-arm.shinyapps.io/smoker/" target="_blank">
-      Prescribed Fire Smoke Report Tool
-    </a>.
-  </div>
-
-</div>
-
-<script>
-function getEntries(containerId, productLabel) {
-  const container = document.getElementById(containerId);
-  if (!container) return [];
-
-  return Array.from(container.querySelectorAll(".report-entry")).map(entry => {
-    const link = entry.querySelector("a");
-
-    return {
-      html: entry.outerHTML,
-      href: link ? link.getAttribute("href") : "",
-      label: link ? link.textContent.trim() : "",
-      region: entry.dataset.region || "Unknown Region",
-      issued: entry.dataset.issued || "",
-      product: productLabel
-    };
-  });
-}
-
-function organizeEntriesByRegion(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  const entries = Array.from(container.querySelectorAll(".report-entry"));
-
-  if (entries.length === 0) return;
-
-  const grouped = {};
-
-  entries.forEach(entry => {
-    const region = entry.dataset.region || "Unknown Region";
-    const issued = entry.dataset.issued || "";
-
-    if (!grouped[region]) grouped[region] = [];
-
-    grouped[region].push({
-      issued: issued,
-      html: entry.outerHTML
-    });
-  });
-
-  const regions = Object.keys(grouped).sort();
-
-  let html = "";
-
-  regions.forEach(region => {
-    grouped[region].sort((a, b) => b.issued.localeCompare(a.issued));
-
-    html += "<div class='region-group'>";
-    html += "<h3>" + region + "</h3>";
-
-    grouped[region].forEach(item => {
-      html += item.html;
-    });
-
-    html += "</div>";
-  });
-
-  container.innerHTML = html;
-}
-
-function buildRecentActivity() {
-  const recent = document.getElementById("recent-activity");
-  if (!recent) return;
-
-  const reports = getEntries("report-list", "Smoke Report");
-  const pbMaps = getEntries("pb-list", "PB Piedmont");
-
-  const allEntries = reports.concat(pbMaps);
-
-  if (allEntries.length === 0) return;
-
-  allEntries.sort((a, b) => b.issued.localeCompare(a.issued));
-
-  let html = "";
-
-  allEntries.forEach(item => {
-    html += "<div class='report-entry recent-entry' data-region='" + item.region + "' data-issued='" + item.issued + "'>";
-    html += "<a href='" + item.href + "' target='_blank'>";
-    html += item.label;
-    html += "</a>";
-    html += "<div class='entry-meta'>" + item.product + " • " + item.region + "</div>";
-    html += "</div>";
-  });
-
-  recent.innerHTML = html;
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  organizeEntriesByRegion("report-list");
-  organizeEntriesByRegion("pb-list");
-  buildRecentActivity();
-});
-</script>
-
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Prescribed Fire Smoke Reports</title>
+
+        <style>
+            body {
+                margin: 0;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                background: #f3f6f8;
+                color: #1f2d3a;
+            }
+
+            .container {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 24px;
+            }
+
+            .hero {
+                background: linear-gradient(90deg, #032b5b 0%, #0b3d73 100%);
+                color: white;
+                border-left: 8px solid #f28c28;
+                border-radius: 16px;
+                padding: 24px 30px;
+                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+            }
+
+            .hero h1 {
+                margin: 0;
+                font-size: 38px;
+            }
+
+            .hero p {
+                margin-top: 10px;
+                color: rgba(255, 255, 255, 0.88);
+                font-size: 17px;
+            }
+
+            .card {
+                margin-top: 24px;
+                background: white;
+                border-radius: 12px;
+                border: 1px solid #d8e0e6;
+                padding: 24px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            }
+
+            .card h2 {
+                margin-top: 0;
+                color: #032b5b;
+            }
+
+            .empty {
+                color: #666;
+                font-style: italic;
+            }
+
+            .footer {
+                margin-top: 24px;
+                font-size: 13px;
+                color: #777;
+            }
+
+            .hero a,
+            .hero a:visited {
+                color: white;
+                font-weight: 700;
+
+                .region-group {
+                    margin-top: 18px;
+                }
+
+                .region-group h3 {
+                    margin: 16px 0 8px 0;
+                    padding: 6px 10px;
+                    background: #eaf1f5;
+                    color: #032b5b;
+                    border-left: 5px solid #f28c28;
+                    border-radius: 6px;
+                    font-size: 16px;
+                }
+
+                .report-entry {
+                    margin: 8px 0 10px 14px;
+                }
+
+                .report-entry a {
+                    color: #032b5b;
+                    font-weight: 700;
+                }
+
+                .entry-meta {
+                    margin-top: 3px;
+                    font-size: 12px;
+                    color: #666;
+                }
+
+                .recent-entry {
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid #e5eaee;
+                }
+
+                .recent-entry:last-child {
+                    border-bottom: none;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="hero">
+                <h1>Prescribed Fire Smoke Reports</h1>
+                <p>
+                    Smoke reports and PB Piedmont output generated from the
+                    <a
+                        href="https://r8-arm.shinyapps.io/smoker/"
+                        target="_blank"
+                    >
+                        Prescribed Fire Smoke Report Tool </a
+                    >.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Recent Activity</h2>
+                <div id="recent-activity">
+                    <p class="empty">No recent activity yet.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Smoke Reports</h2>
+                <div id="report-list">
+                    <!-- ===== BEGIN AUTO-GENERATED SMOKE REPORT LINKS ===== -->
+
+                    <!-- ===== END AUTO-GENERATED SMOKE REPORT LINKS ===== -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>PB Piedmont Output</h2>
+                <div id="pb-list">
+                    <!-- ===== BEGIN AUTO-GENERATED PB PIEDMONT LINKS ===== -->
+
+                    <!-- ===== END AUTO-GENERATED PB PIEDMONT LINKS ===== -->
+                </div>
+            </div>
+
+            <div class="footer">
+                Generated reports are published automatically from the
+                <a href="https://r8-arm.shinyapps.io/smoker/" target="_blank">
+                    Prescribed Fire Smoke Report Tool </a
+                >.
+            </div>
+        </div>
+
+        <script>
+            function getEntries(containerId, productLabel) {
+                const container = document.getElementById(containerId);
+                if (!container) return [];
+
+                return Array.from(
+                    container.querySelectorAll(".report-entry"),
+                ).map((entry) => {
+                    const link = entry.querySelector("a");
+
+                    return {
+                        html: entry.outerHTML,
+                        href: link ? link.getAttribute("href") : "",
+                        label: link ? link.textContent.trim() : "",
+                        region: entry.dataset.region || "Unknown Region",
+                        issued: entry.dataset.issued || "",
+                        product: productLabel,
+                    };
+                });
+            }
+
+            function organizeEntriesByRegion(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                const entries = Array.from(
+                    container.querySelectorAll(".report-entry"),
+                );
+
+                if (entries.length === 0) return;
+
+                const grouped = {};
+
+                entries.forEach((entry) => {
+                    const region = entry.dataset.region || "Unknown Region";
+                    const issued = entry.dataset.issued || "";
+
+                    if (!grouped[region]) grouped[region] = [];
+
+                    grouped[region].push({
+                        issued: issued,
+                        html: entry.outerHTML,
+                    });
+                });
+
+                const regions = Object.keys(grouped).sort();
+
+                let html = "";
+
+                regions.forEach((region) => {
+                    grouped[region].sort((a, b) =>
+                        b.issued.localeCompare(a.issued),
+                    );
+
+                    html += "<div class='region-group'>";
+                    html += "<h3>" + region + "</h3>";
+
+                    grouped[region].forEach((item) => {
+                        html += item.html;
+                    });
+
+                    html += "</div>";
+                });
+
+                container.innerHTML = html;
+            }
+
+            function buildRecentActivity() {
+                const recent = document.getElementById("recent-activity");
+                if (!recent) return;
+
+                const reports = getEntries("report-list", "Smoke Report");
+                const pbMaps = getEntries("pb-list", "PB Piedmont");
+
+                const allEntries = reports.concat(pbMaps);
+
+                if (allEntries.length === 0) return;
+
+                allEntries.sort((a, b) => b.issued.localeCompare(a.issued));
+
+                let html = "";
+
+                allEntries.forEach((item) => {
+                    html +=
+                        "<div class='report-entry recent-entry' data-region='" +
+                        item.region +
+                        "' data-issued='" +
+                        item.issued +
+                        "'>";
+                    html += "<a href='" + item.href + "' target='_blank'>";
+                    html += item.label;
+                    html += "</a>";
+                    html +=
+                        "<div class='entry-meta'>" +
+                        item.product +
+                        " • " +
+                        item.region +
+                        "</div>";
+                    html += "</div>";
+                });
+
+                recent.innerHTML = html;
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                organizeEntriesByRegion("report-list");
+                organizeEntriesByRegion("pb-list");
+                buildRecentActivity();
+            });
+        </script>
+    </body>
 </html>
