@@ -109,6 +109,32 @@
                 font-size: 13px;
                 color: #777;
             }
+
+            #products-table th,
+            #products-table td {
+                padding: 9px 10px;
+                border-bottom: 1px solid #e5eaee;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            #products-table th {
+                background: #eaf1f5;
+                color: #032b5b;
+                font-weight: 800;
+            }
+
+            #products-table a {
+                color: #032b5b;
+                font-weight: 700;
+            }
+
+            #search-box,
+            #region-filter,
+            #product-filter {
+                border: 1px solid #b8c5cf;
+                border-radius: 6px;
+                padding: 8px;
         </style>
     </head>
 
@@ -135,19 +161,61 @@
             </div>
 
             <div class="card">
-                <h2>Smoke Reports</h2>
-                <div id="report-list">
-                    <!-- ===== BEGIN AUTO-GENERATED SMOKE REPORT LINKS ===== -->
+                <h2>Generated Products</h2>
 
+                <div
+                    style="
+                        margin-bottom: 15px;
+                        display: flex;
+                        gap: 12px;
+                        flex-wrap: wrap;
+                    "
+                >
+                    <input
+                        id="search-box"
+                        type="text"
+                        placeholder="Search burn name or forest..."
+                        style="padding: 8px; min-width: 250px"
+                    />
+
+                    <select id="region-filter">
+                        <option value="">All Regions</option>
+                    </select>
+
+                    <select id="product-filter">
+                        <option value="">All Products</option>
+                        <option value="Smoke Report">Smoke Report</option>
+                        <option value="PB Piedmont">PB Piedmont</option>
+                    </select>
+                </div>
+
+                <table
+                    id="products-table"
+                    style="width: 100%; border-collapse: collapse"
+                >
+                    <thead>
+                        <tr>
+                            <th>Date Issued</th>
+                            <th>Burn Date</th>
+                            <th>Burn Name</th>
+                            <th>Forest</th>
+                            <th>Region</th>
+                            <th>Product</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-body"></tbody>
+                </table>
+
+                <!-- hidden metadata stores -->
+                <div id="report-list" style="display: none">
+                    <!-- ===== BEGIN AUTO-GENERATED SMOKE REPORT LINKS ===== -->
+                    <p class="empty">No reports available yet.</p>
                     <!-- ===== END AUTO-GENERATED SMOKE REPORT LINKS ===== -->
                 </div>
-            </div>
 
-            <div class="card">
-                <h2>PB Piedmont Output</h2>
-                <div id="pb-list">
+                <div id="pb-list" style="display: none">
                     <!-- ===== BEGIN AUTO-GENERATED PB PIEDMONT LINKS ===== -->
-
+                    <p class="empty">No PB Piedmont maps available yet.</p>
                     <!-- ===== END AUTO-GENERATED PB PIEDMONT LINKS ===== -->
                 </div>
             </div>
@@ -168,123 +236,147 @@
                 return Array.from(
                     container.querySelectorAll(".report-entry"),
                 ).map((entry) => {
-                    const link = entry.querySelector("a");
-
                     return {
-                        html: entry.outerHTML,
-                        href: link ? link.getAttribute("href") : "",
-                        label: link ? link.textContent.trim() : "",
-                        region: entry.dataset.region || "Unknown Region",
+                        product: entry.dataset.product || productLabel,
+                        region: entry.dataset.region || "",
+                        forest: entry.dataset.forest || "",
+                        burnName: entry.dataset.burnName || "",
+                        burnDate: entry.dataset.burnDate || "",
                         issued: entry.dataset.issued || "",
-                        product: productLabel,
+                        issuedLabel: entry.dataset.issuedLabel || "",
+                        url: entry.dataset.url || "",
                     };
                 });
             }
 
-            function organizeEntriesByRegion(containerId) {
-                const container = document.getElementById(containerId);
-                if (!container) return;
-
-                const entries = Array.from(
-                    container.querySelectorAll(".report-entry"),
+            function getAllEntries() {
+                return getEntries("report-list", "Smoke Report").concat(
+                    getEntries("pb-list", "PB Piedmont"),
                 );
-
-                if (entries.length === 0) return;
-
-                const grouped = {};
-
-                entries.forEach((entry) => {
-                    const region = entry.dataset.region || "Unknown Region";
-                    const issued = entry.dataset.issued || "";
-
-                    if (!grouped[region]) grouped[region] = [];
-
-                    grouped[region].push({
-                        issued: issued,
-                        html: entry.outerHTML,
-                    });
-                });
-
-                const regions = Object.keys(grouped).sort();
-
-                let html = "";
-
-                regions.forEach((region) => {
-                    grouped[region].sort((a, b) =>
-                        b.issued.localeCompare(a.issued),
-                    );
-
-                    html += "<div class='region-group'>";
-                    html += "<h3>" + region + "</h3>";
-
-                    grouped[region].forEach((item) => {
-                        html += item.html;
-                    });
-
-                    html += "</div>";
-                });
-
-                container.innerHTML = html;
             }
 
-            function buildRecentActivity() {
+            function populateRegionFilter(entries) {
+                const filter = document.getElementById("region-filter");
+                if (!filter) return;
+
+                const regions = [
+                    ...new Set(entries.map((x) => x.region).filter(Boolean)),
+                ].sort();
+
+                regions.forEach((region) => {
+                    const option = document.createElement("option");
+                    option.value = region;
+                    option.textContent = region;
+                    filter.appendChild(option);
+                });
+            }
+
+            function renderTable(entries) {
+                const body = document.getElementById("products-body");
+                if (!body) return;
+
+                const searchText = (
+                    document.getElementById("search-box")?.value || ""
+                ).toLowerCase();
+                const regionFilter =
+                    document.getElementById("region-filter")?.value || "";
+                const productFilter =
+                    document.getElementById("product-filter")?.value || "";
+
+                const filtered = entries
+                    .filter((item) => {
+                        const searchable = (
+                            item.burnName +
+                            " " +
+                            item.forest
+                        ).toLowerCase();
+
+                        return (
+                            (!searchText || searchable.includes(searchText)) &&
+                            (!regionFilter || item.region === regionFilter) &&
+                            (!productFilter || item.product === productFilter)
+                        );
+                    })
+                    .sort((a, b) => b.issued.localeCompare(a.issued));
+
+                if (filtered.length === 0) {
+                    body.innerHTML =
+                        "<tr><td colspan='6' class='empty'>No generated products match the current filters.</td></tr>";
+                    return;
+                }
+
+                body.innerHTML = filtered
+                    .map((item) => {
+                        return `
+                <tr>
+                  <td>${item.issuedLabel}</td>
+                  <td>${item.burnDate}</td>
+                  <td>${item.burnName}</td>
+                  <td>${item.forest}</td>
+                  <td>${item.region}</td>
+                  <td><a href="${item.url}" target="_blank">${item.product}</a></td>
+                </tr>
+              `;
+                    })
+                    .join("");
+            }
+
+            function renderRecentActivity(entries) {
                 const recent = document.getElementById("recent-activity");
                 if (!recent) return;
-
-                const reports = getEntries("report-list", "Smoke Report");
-                const pbMaps = getEntries("pb-list", "PB Piedmont");
 
                 const now = new Date();
                 const twoDaysAgo = new Date(
                     now.getTime() - 2 * 24 * 60 * 60 * 1000,
                 );
 
-                const allEntries = reports.concat(pbMaps).filter((item) => {
-                    if (!item.issued) return false;
+                const recentEntries = entries
+                    .filter((item) => {
+                        if (!item.issued) return false;
+                        const issuedDate = new Date(item.issued);
+                        return (
+                            !isNaN(issuedDate.getTime()) &&
+                            issuedDate >= twoDaysAgo
+                        );
+                    })
+                    .sort((a, b) => b.issued.localeCompare(a.issued));
 
-                    const issuedDate = new Date(item.issued);
-
-                    if (isNaN(issuedDate.getTime())) return false;
-
-                    return issuedDate >= twoDaysAgo;
-                });
-
-                if (allEntries.length === 0) {
+                if (recentEntries.length === 0) {
                     recent.innerHTML =
                         "<p class='empty'>No recent activity in the last 2 days.</p>";
                     return;
                 }
 
-                allEntries.sort((a, b) => b.issued.localeCompare(a.issued));
-
-                let html = "";
-
-                allEntries.forEach((item) => {
-                    html +=
-                        "<div class='report-entry recent-entry' data-region='" +
-                        item.region +
-                        "' data-issued='" +
-                        item.issued +
-                        "'>";
-                    html += "<a href='" + item.href + "' target='_blank'>";
-                    html += item.label;
-                    html += "</a>";
-                    html +=
-                        "<div class='entry-meta'>" +
-                        item.product +
-                        " • " +
-                        item.region +
-                        "</div>";
-                    html += "</div>";
-                });
-
-                recent.innerHTML = html;
+                recent.innerHTML = recentEntries
+                    .map((item) => {
+                        return `
+                <div class="report-entry recent-entry">
+                  <a href="${item.url}" target="_blank">${item.product}</a>
+                  <div class="entry-meta">
+                    ${item.issuedLabel} • ${item.burnName} • ${item.forest} • ${item.region}
+                  </div>
+                </div>
+              `;
+                    })
+                    .join("");
             }
 
             document.addEventListener("DOMContentLoaded", function () {
-                buildRecentActivity();
-                organizeEntriesByRegion("report-list");
-                organizeEntriesByRegion("pb-list");
+                const entries = getAllEntries();
+
+                populateRegionFilter(entries);
+                renderRecentActivity(entries);
+                renderTable(entries);
+
+                document
+                    .getElementById("search-box")
+                    ?.addEventListener("input", () => renderTable(entries));
+                document
+                    .getElementById("region-filter")
+                    ?.addEventListener("change", () => renderTable(entries));
+                document
+                    .getElementById("product-filter")
+                    ?.addEventListener("change", () => renderTable(entries));
             });
         </script>
     </body>
