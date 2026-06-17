@@ -87,11 +87,12 @@
             .report-entry a {
                 color: #032b5b;
                 font-weight: 700;
+                font-size: 15px;
             }
 
             .entry-meta {
-                margin-top: 3px;
-                font-size: 12px;
+                margin-top: 2px;
+                font-size: 13px;
                 color: #666;
             }
 
@@ -352,13 +353,16 @@
                 recent.innerHTML = recentEntries
                     .map((item) => {
                         return `
-                <div class="report-entry recent-entry">
-                  <a href="${item.url}" target="_blank">${item.product}</a>
-                  <div class="entry-meta">
-                    ${item.issuedLabel} • ${item.burnName} • ${item.forest} • ${item.region}
-                  </div>
-                </div>
-              `;
+                          <div class="report-entry recent-entry">
+                            <a href="${item.url}" target="_blank">${item.burnName}</a>
+                            <div class="entry-meta">
+                              ${item.issuedLabel}
+                              • ${item.forest}
+                              • ${item.region}
+                              • ${item.product}
+                            </div>
+                          </div>
+                        `;
                     })
                     .join("");
             }
