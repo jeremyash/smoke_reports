@@ -216,12 +216,24 @@
                 >
                     <thead>
                         <tr>
-                            <th>Date Issued</th>
-                            <th>Burn Date</th>
-                            <th>Burn Name</th>
-                            <th>Forest</th>
-                            <th>Region</th>
-                            <th>Product</th>
+                            <th data-sort-key="issued" data-label="Date Issued">
+                                Date Issued
+                            </th>
+                            <th data-sort-key="burnDate" data-label="Burn Date">
+                                Burn Date
+                            </th>
+                            <th data-sort-key="burnName" data-label="Burn Name">
+                                Burn Name
+                            </th>
+                            <th data-sort-key="forest" data-label="Forest">
+                                Forest
+                            </th>
+                            <th data-sort-key="region" data-label="Region">
+                                Region
+                            </th>
+                            <th data-sort-key="product" data-label="Product">
+                                Product
+                            </th>
                         </tr>
                     </thead>
                     <tbody id="products-body"></tbody>
@@ -250,6 +262,11 @@
         </div>
 
         <script>
+            let currentSort = {
+                key: "issued",
+                direction: "desc",
+            };
+
             function getEntries(containerId, productLabel) {
                 const container = document.getElementById(containerId);
                 if (!container) return [];
@@ -292,6 +309,65 @@
                 });
             }
 
+            function getSortValue(item, key) {
+                if (key === "burnName") return item.burnName || "";
+                if (key === "forest") return item.forest || "";
+                if (key === "region") return item.region || "";
+                if (key === "product") return item.product || "";
+                if (key === "burnDate") return item.burnDate || "";
+                return item.issued || "";
+            }
+
+            function compareEntries(a, b) {
+                const aValue = getSortValue(a, currentSort.key);
+                const bValue = getSortValue(b, currentSort.key);
+
+                const result = aValue.localeCompare(bValue);
+
+                return currentSort.direction === "asc" ? result : -result;
+            }
+
+            function updateSortIndicators() {
+                document.querySelectorAll("th[data-sort-key]").forEach((th) => {
+                    const key = th.getAttribute("data-sort-key");
+                    const baseLabel = th.getAttribute("data-label");
+
+                    if (key === currentSort.key) {
+                        th.textContent =
+                            baseLabel +
+                            (currentSort.direction === "asc" ? " ▲" : " ▼");
+                    } else {
+                        th.textContent = baseLabel;
+                    }
+                });
+            }
+
+            function setupTableSorting(entries) {
+                document.querySelectorAll("th[data-sort-key]").forEach((th) => {
+                    th.style.cursor = "pointer";
+
+                    th.addEventListener("click", () => {
+                        const key = th.getAttribute("data-sort-key");
+
+                        if (currentSort.key === key) {
+                            currentSort.direction =
+                                currentSort.direction === "asc"
+                                    ? "desc"
+                                    : "asc";
+                        } else {
+                            currentSort.key = key;
+                            currentSort.direction =
+                                key === "issued" ? "desc" : "asc";
+                        }
+
+                        updateSortIndicators();
+                        renderTable(entries);
+                    });
+                });
+
+                updateSortIndicators();
+            }
+
             function renderTable(entries) {
                 const body = document.getElementById("products-body");
                 if (!body) return;
@@ -318,7 +394,7 @@
                             (!productFilter || item.product === productFilter)
                         );
                     })
-                    .sort((a, b) => b.issued.localeCompare(a.issued));
+                    .sort((a, b) => compareEntries(a, b));
 
                 if (filtered.length === 0) {
                     body.innerHTML =
@@ -394,6 +470,7 @@
 
                 populateRegionFilter(entries);
                 renderRecentActivity(entries);
+                setupTableSorting(entries);
                 renderTable(entries);
 
                 document
