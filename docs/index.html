@@ -413,20 +413,20 @@
                 body.innerHTML = filtered
                     .map((item) => {
                         return `
-                <tr>
-                  <td>${item.issuedLabel}</td>
-                  <td>${item.burnDate}</td>
-                  <td>${item.burnName}</td>
-                  <td>${item.forest}</td>
-                  <td>${item.region}</td>
-                  <td>
-                    <a class="product-pill ${item.product === "PB Piedmont" ? "pb-pill" : "sr-pill"}"
-                       href="${item.url}"
-                       target="_blank">
-                      ${item.product}
-                    </a>
-                  </td>
-                </tr>
+                        <tr>
+                          <td>${item.issuedLabel}</td>
+                          <td>${item.burnDate}</td>
+                          <td>
+                            <a href="${item.url}" target="_blank">${item.burnName}</a>
+                          </td>
+                          <td>${item.forest}</td>
+                          <td>${item.region}</td>
+                          <td>
+                            <span class="product-pill ${item.product === "PB Piedmont" ? "pb-pill" : "sr-pill"}">
+                              ${item.product}
+                            </span>
+                          </td>
+                        </tr>
               `;
                     })
                     .join("");
