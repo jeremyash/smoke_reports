@@ -130,6 +130,11 @@
                 color: #8a4b00 !important;
             }
 
+            .mb-pill {
+                background: #ede7f6;
+                color: #4527a0 !important;
+            }
+
             #products-table th,
             #products-table td {
                 padding: 9px 10px;
@@ -164,13 +169,8 @@
             <div class="hero">
                 <h1>Prescribed Fire Smoke Reports</h1>
                 <p>
-                    Smoke reports and PB Piedmont output generated from the
-                    <a
-                        href="https://r8-arm.shinyapps.io/smoker/"
-                        target="_blank"
-                    >
-                        Prescribed Fire Smoke Report Tool</a
-                    >.
+                    Smoke reports, PB Piedmont output, and Multi-burn Exposure
+                    reports generated from prescribed fire smoke modeling tools.
                 </p>
             </div>
 
@@ -195,7 +195,7 @@
                     <input
                         id="search-box"
                         type="text"
-                        placeholder="Search burn name or forest..."
+                        placeholder="Search burn name, project, or forest..."
                         style="padding: 8px; min-width: 250px"
                     />
 
@@ -207,6 +207,9 @@
                         <option value="">All Products</option>
                         <option value="Smoke Report">Smoke Report</option>
                         <option value="PB Piedmont">PB Piedmont</option>
+                        <option value="Multi-burn Exposure">
+                            Multi-burn Exposure
+                        </option>
                     </select>
                 </div>
 
@@ -236,42 +239,121 @@
                             </th>
                         </tr>
                     </thead>
+
                     <tbody id="products-body"></tbody>
                 </table>
 
                 <!-- hidden metadata stores -->
+
                 <div id="report-list" style="display: none">
                     <!-- ===== BEGIN AUTO-GENERATED SMOKE REPORT LINKS ===== -->
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='hfhgf' data-burn-date='2026-07-15' data-issued='2026-07-15T11:40:31' data-issued-label='2026-07-15 11:40 MDT' data-url='sr/20260715-hfhgf-i1140.html'></div>
 
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Nantahala National Forest' data-burn-name='Hourly with local time' data-burn-date='2026-06-17' data-issued='2026-06-18T18:36:19' data-issued-label='2026-06-18 18:36 EDT' data-url='sr/20260617-hourly-with-local-time-i1836.html'></div>
+                    <div
+                        class="report-entry"
+                        data-product="Smoke Report"
+                        data-region="R02"
+                        data-forest="Pike and San Isabel National Forests"
+                        data-burn-name="hfhgf"
+                        data-burn-date="2026-07-15"
+                        data-issued="2026-07-15T11:40:31"
+                        data-issued-label="2026-07-15 11:40 MDT"
+                        data-url="sr/20260715-hfhgf-i1140.html"
+                    ></div>
 
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Nantahala National Forest' data-burn-name='Report hourly arrows' data-burn-date='2026-06-17' data-issued='2026-06-18T18:19:57' data-issued-label='2026-06-18 18:19 EDT' data-url='sr/20260617-report-hourly-arrows-i1819.html'></div>
+                    <div
+                        class="report-entry"
+                        data-product="Smoke Report"
+                        data-region="R08"
+                        data-forest="Nantahala National Forest"
+                        data-burn-name="Hourly with local time"
+                        data-burn-date="2026-06-17"
+                        data-issued="2026-06-18T18:36:19"
+                        data-issued-label="2026-06-18 18:36 EDT"
+                        data-url="sr/20260617-hourly-with-local-time-i1836.html"
+                    ></div>
 
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Nantahala National Forest' data-burn-name='Report and PB' data-burn-date='2026-06-17' data-issued='2026-06-17T17:16:55' data-issued-label='2026-06-17 17:16 EDT' data-url='sr/20260617-report-and-pb-i1716.html'></div>
+                    <div
+                        class="report-entry"
+                        data-product="Smoke Report"
+                        data-region="R08"
+                        data-forest="Nantahala National Forest"
+                        data-burn-name="Report hourly arrows"
+                        data-burn-date="2026-06-17"
+                        data-issued="2026-06-18T18:19:57"
+                        data-issued-label="2026-06-18 18:19 EDT"
+                        data-url="sr/20260617-report-hourly-arrows-i1819.html"
+                    ></div>
 
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Nantahala National Forest' data-burn-name='Report Alone' data-burn-date='2026-06-17' data-issued='2026-06-17T17:12:31' data-issued-label='2026-06-17 17:12 EDT' data-url='sr/20260617-report-alone-i1712.html'></div>
+                    <div
+                        class="report-entry"
+                        data-product="Smoke Report"
+                        data-region="R08"
+                        data-forest="Nantahala National Forest"
+                        data-burn-name="Report and PB"
+                        data-burn-date="2026-06-17"
+                        data-issued="2026-06-17T17:16:55"
+                        data-issued-label="2026-06-17 17:16 EDT"
+                        data-url="sr/20260617-report-and-pb-i1716.html"
+                    ></div>
 
+                    <div
+                        class="report-entry"
+                        data-product="Smoke Report"
+                        data-region="R08"
+                        data-forest="Nantahala National Forest"
+                        data-burn-name="Report Alone"
+                        data-burn-date="2026-06-17"
+                        data-issued="2026-06-17T17:12:31"
+                        data-issued-label="2026-06-17 17:12 EDT"
+                        data-url="sr/20260617-report-alone-i1712.html"
+                    ></div>
 
                     <!-- ===== END AUTO-GENERATED SMOKE REPORT LINKS ===== -->
                 </div>
 
                 <div id="pb-list" style="display: none">
                     <!-- ===== BEGIN AUTO-GENERATED PB PIEDMONT LINKS ===== -->
-    <div class='report-entry' data-product='PB Piedmont' data-region='R08' data-forest='Nantahala National Forest' data-burn-name='Report and PB' data-burn-date='2026-06-17' data-issued='2026-06-17T17:16:55' data-issued-label='2026-06-17 17:16 EDT' data-url='pb/20260617-report-and-pb-i1716.html'></div>
 
-    <div class='report-entry' data-product='PB Piedmont' data-region='R08' data-forest='Nantahala National Forest' data-burn-name='PB Alone' data-burn-date='2026-06-17' data-issued='2026-06-17T17:14:49' data-issued-label='2026-06-17 17:14 EDT' data-url='pb/20260617-pb-alone-i1714.html'></div>
+                    <div
+                        class="report-entry"
+                        data-product="PB Piedmont"
+                        data-region="R08"
+                        data-forest="Nantahala National Forest"
+                        data-burn-name="Report and PB"
+                        data-burn-date="2026-06-17"
+                        data-issued="2026-06-17T17:16:55"
+                        data-issued-label="2026-06-17 17:16 EDT"
+                        data-url="pb/20260617-report-and-pb-i1716.html"
+                    ></div>
 
-                    
+                    <div
+                        class="report-entry"
+                        data-product="PB Piedmont"
+                        data-region="R08"
+                        data-forest="Nantahala National Forest"
+                        data-burn-name="PB Alone"
+                        data-burn-date="2026-06-17"
+                        data-issued="2026-06-17T17:14:49"
+                        data-issued-label="2026-06-17 17:14 EDT"
+                        data-url="pb/20260617-pb-alone-i1714.html"
+                    ></div>
+
                     <!-- ===== END AUTO-GENERATED PB PIEDMONT LINKS ===== -->
+                </div>
+
+                <div id="mb-list" style="display: none">
+                    <p class="empty">
+                        No multi-burn exposure reports available yet.
+                    </p>
+
+                    <!-- ===== BEGIN AUTO-GENERATED MULTI-BURN EXPOSURE LINKS ===== -->
+                    <!-- ===== END AUTO-GENERATED MULTI-BURN EXPOSURE LINKS ===== -->
                 </div>
             </div>
 
             <div class="footer">
                 Generated reports are published automatically from the
-                <a href="https://r8-arm.shinyapps.io/smoker/" target="_blank">
-                    Prescribed Fire Smoke Report Tool</a
-                >.
+                prescribed fire smoke modeling tools.
             </div>
         </div>
 
@@ -302,9 +384,11 @@
             }
 
             function getAllEntries() {
-                return getEntries("report-list", "Smoke Report").concat(
-                    getEntries("pb-list", "PB Piedmont"),
-                );
+                return getEntries("report-list", "Smoke Report")
+                    .concat(getEntries("pb-list", "PB Piedmont"))
+                    .concat(
+                        getEntries("mb-list", "Multi-burn Exposure"),
+                    );
             }
 
             function populateRegionFilter(entries) {
@@ -382,6 +466,18 @@
                 updateSortIndicators();
             }
 
+            function getProductPillClass(product) {
+                if (product === "PB Piedmont") {
+                    return "pb-pill";
+                }
+
+                if (product === "Multi-burn Exposure") {
+                    return "mb-pill";
+                }
+
+                return "sr-pill";
+            }
+
             function renderTable(entries) {
                 const body = document.getElementById("products-body");
                 if (!body) return;
@@ -389,8 +485,10 @@
                 const searchText = (
                     document.getElementById("search-box")?.value || ""
                 ).toLowerCase();
+
                 const regionFilter =
                     document.getElementById("region-filter")?.value || "";
+
                 const productFilter =
                     document.getElementById("product-filter")?.value || "";
 
@@ -428,12 +526,12 @@
                           <td>${item.forest}</td>
                           <td>${item.region}</td>
                           <td>
-                            <span class="product-pill ${item.product === "PB Piedmont" ? "pb-pill" : "sr-pill"}">
+                            <span class="product-pill ${getProductPillClass(item.product)}">
                               ${item.product}
                             </span>
                           </td>
                         </tr>
-              `;
+                        `;
                     })
                     .join("");
             }
@@ -443,6 +541,7 @@
                 if (!recent) return;
 
                 const now = new Date();
+
                 const twoDaysAgo = new Date(
                     now.getTime() - 2 * 24 * 60 * 60 * 1000,
                 );
@@ -450,7 +549,9 @@
                 const recentEntries = entries
                     .filter((item) => {
                         if (!item.issued) return false;
+
                         const issuedDate = new Date(item.issued);
+
                         return (
                             !isNaN(issuedDate.getTime()) &&
                             issuedDate >= twoDaysAgo
@@ -467,14 +568,14 @@
                 recent.innerHTML = recentEntries
                     .map((item) => {
                         return `
-                      <div class="report-entry recent-entry">
-                        ${item.issuedLabel} •
-                        <a href="${item.url}" target="_blank">${item.burnName}</a>
-                        • ${item.forest}
-                        • ${item.region}
-                        • ${item.product}
-                      </div>
-                    `;
+                        <div class="report-entry recent-entry">
+                          ${item.issuedLabel} •
+                          <a href="${item.url}" target="_blank">${item.burnName}</a>
+                          ${item.forest ? `• ${item.forest}` : ""}
+                          ${item.region ? `• ${item.region}` : ""}
+                          • ${item.product}
+                        </div>
+                        `;
                     })
                     .join("");
             }
@@ -490,9 +591,11 @@
                 document
                     .getElementById("search-box")
                     ?.addEventListener("input", () => renderTable(entries));
+
                 document
                     .getElementById("region-filter")
                     ?.addEventListener("change", () => renderTable(entries));
+
                 document
                     .getElementById("product-filter")
                     ?.addEventListener("change", () => renderTable(entries));
