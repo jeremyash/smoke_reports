@@ -88,24 +88,41 @@ def main():
         print(f"  HTML file: {'Found' if file_exists else 'MISSING'}")
         print(f"  Index entries: {len(matches)}")
 
-        if not file_exists or len(matches) < 1:
+        if not file_exists and len(matches) == 0:
+            print("  Status: Already deleted — skipping")
+            continue
+
+        if not file_exists and len(matches) > 0:
+            print("  Status: Missing HTML file but archive entry exists")
             errors.append(target)
+
+        if file_exists and len(matches) == 0:
+            print("  Status: Orphaned HTML file — will remove")
 
     if errors:
         print("\nStopped: missing files or unexpected index entries.")
         print("No changes made.")
         return
 
-    print(f"\nReady to remove {len(targets)} reports.")
+    pending = [
+        target for target in targets
+        if (DOCS / target).is_file()
+    ]
+
+    print(f"\nReports listed: {len(targets)}")
+    print(f"Already deleted: {len(targets) - len(pending)}")
+    print(f"Ready to remove: {len(pending)}")
 
     if not args.apply:
         print("No files changed. Run with --apply to proceed.")
         return
 
     # Remove selected metadata entries from the archive.
-    # Remove selected metadata entries from the archive.
     for target in targets:
-        for match in found_urls[target]:
+        if not (DOCS / target).is_file():
+            continue
+
+        for match in found_urls.get(target, []):
             entry = match.group("entry")
             index_html = index_html.replace(entry + "\n", "", 1)
 
@@ -113,7 +130,10 @@ def main():
 
     # Remove the selected report HTML files.
     for target in targets:
-        (DOCS / target).unlink()
+        file_path = DOCS / target
+
+        if file_path.is_file():
+            file_path.unlink()
 
     print("\nCleanup complete.")
     print("Review changes with: git diff --stat")
