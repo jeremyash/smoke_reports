@@ -437,20 +437,35 @@
                 });
             }
 
+            // Convert report issuance time to a comparable UTC timestamp.
+            // Older reports without issuedUtc fall back to issued.
+            function getIssuedTimestamp(item) {
+                const timestamp = item.issuedUtc || item.issued || "";
+                const parsed = Date.parse(timestamp);
+
+                return Number.isNaN(parsed) ? 0 : parsed;
+            }
+
             function getSortValue(item, key) {
                 if (key === "burnName") return item.burnName || "";
                 if (key === "forest") return item.forest || "";
                 if (key === "region") return item.region || "";
                 if (key === "product") return item.product || "";
                 if (key === "burnDate") return item.burnDate || "";
-                return item.issued || "";
+                return item.issuedUtc || item.issued || "";
             }
 
             function compareEntries(a, b) {
-                const aValue = getSortValue(a, currentSort.key);
-                const bValue = getSortValue(b, currentSort.key);
+                let result;
 
-                const result = aValue.localeCompare(bValue);
+                if (currentSort.key === "issued") {
+                    result = getIssuedTimestamp(a) - getIssuedTimestamp(b);
+                } else {
+                    const aValue = getSortValue(a, currentSort.key);
+                    const bValue = getSortValue(b, currentSort.key);
+
+                    result = aValue.localeCompare(bValue);
+                }
 
                 return currentSort.direction === "asc" ? result : -result;
             }
@@ -578,16 +593,17 @@
 
                 const recentEntries = entries
                     .filter((item) => {
-                        if (!item.issued) return false;
-
-                        const issuedDate = new Date(item.issued);
+                        const issuedTimestamp = getIssuedTimestamp(item);
 
                         return (
-                            !isNaN(issuedDate.getTime()) &&
-                            issuedDate >= twoDaysAgo
+                            issuedTimestamp > 0 &&
+                            issuedTimestamp >= twoDaysAgo.getTime()
                         );
                     })
-                    .sort((a, b) => b.issued.localeCompare(a.issued));
+                    .sort(
+                        (a, b) =>
+                            getIssuedTimestamp(b) - getIssuedTimestamp(a)
+                    );
 
                 if (recentEntries.length === 0) {
                     recent.innerHTML =
