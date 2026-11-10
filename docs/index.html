@@ -287,18 +287,18 @@
 
     <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Daniel Boone National Forest' data-burn-name='testing gitupload' data-burn-date='2026-10-20' data-issued='2026-10-20T15:03:35' data-issued-label='2026-10-20 15:03 EDT' data-url='sr/20261020-testing-gitupload-i1503.html'></div>
 
-    
 
-    
 
-    
+
+
+
 
     <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - Unit O' data-burn-date='2026-10-12' data-issued='2026-10-12T09:58:24' data-issued-label='2026-10-12 09:58 MDT' data-url='sr/20261012-harris-park-unit-o-i0958.html'></div>
 
     <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - Unit O' data-burn-date='2026-10-12' data-issued='2026-10-12T09:34:34' data-issued-label='2026-10-12 09:34 MDT' data-url='sr/20261012-harris-park-unit-o-i0934.html'></div>
 
-    
-    
+
+
     <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Rampart Res' data-burn-date='2026-10-08' data-issued='2026-10-07T13:57:54' data-issued-label='2026-10-07 13:57 MDT' data-url='sr/20261008-rampart-res-i1357.html'></div>
 
     <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Rampart Res' data-burn-date='2026-10-08' data-issued='2026-10-07T13:57:54' data-issued-label='2026-10-07 13:57 MDT' data-url='sr/20261008-rampart-res-i1357.html'></div>
@@ -311,7 +311,7 @@
 
     <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Bienville Comp 19,21' data-burn-date='2026-10-07' data-issued='2026-10-07T07:52:43' data-issued-label='2026-10-07 07:52 CDT' data-url='sr/20261007-bienville-comp-19-21-i0752.html'></div>
 
-    
+
     <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - LM' data-burn-date='2026-10-06' data-issued='2026-10-06T11:41:37' data-issued-label='2026-10-06 11:41 MDT' data-url='sr/20261006-harris-park-lm-i1141.html'></div>
 
     <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - LM' data-burn-date='2026-10-06' data-issued='2026-10-06T11:41:37' data-issued-label='2026-10-06 11:41 MDT' data-url='sr/20261006-harris-park-lm-i1141.html'></div>
@@ -330,41 +330,41 @@
 
     <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Compartment 276 Site Prep' data-burn-date='2026-09-24' data-issued='2026-09-21T12:32:29' data-issued-label='2026-09-21 12:32 CDT' data-url='sr/20260924-compartment-276-site-prep-i1232.html'></div>
 
-    
-    
-    
-    
-    
-    
-    
-    
 
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <!-- ===== END AUTO-GENERATED SMOKE REPORT LINKS ===== -->
                 </div>
 
                 <div id="pb-list" style="display: none">
                     <!-- ===== BEGIN AUTO-GENERATED PB PIEDMONT LINKS ===== -->
-    
 
-    
 
-    
 
-    
-    
+
+
+
+
+
     <div class='report-entry' data-product='PB Piedmont' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Bienville Comp 19,21' data-burn-date='2026-10-07' data-issued='2026-10-07T07:52:43' data-issued-label='2026-10-07 07:52 CDT' data-url='pb/20261007-bienville-comp-19-21-i0752.html'></div>
 
-    
-    
-    
 
-                    
-                    
+
+
+
+
+
                     <!-- ===== END AUTO-GENERATED PB PIEDMONT LINKS ===== -->
                 </div>
 
@@ -610,25 +610,54 @@
                     .join("");
             }
 
-            document.addEventListener("DOMContentLoaded", function () {
-                const entries = getAllEntries();
 
-                populateRegionFilter(entries);
-                renderRecentActivity(entries);
-                setupTableSorting(entries);
-                renderTable(entries);
+            document.addEventListener("DOMContentLoaded", async function () {
+                const archiveUrl =
+                    "https://rxsmoke-report-index.jeremyd-ash.workers.dev/reports";
 
-                document
-                    .getElementById("search-box")
-                    ?.addEventListener("input", () => renderTable(entries));
+                try {
+                    const response = await fetch(archiveUrl, {
+                        cache: "no-store"
+                    });
 
-                document
-                    .getElementById("region-filter")
-                    ?.addEventListener("change", () => renderTable(entries));
+                    if (!response.ok) {
+                        throw new Error(`Archive request failed: ${response.status}`);
+                    }
 
-                document
-                    .getElementById("product-filter")
-                    ?.addEventListener("change", () => renderTable(entries));
+                    const data = await response.json();
+
+                    if (!Array.isArray(data.reports)) {
+                        throw new Error("Invalid archive response");
+                    }
+
+                    const entries = data.reports;
+
+                    populateRegionFilter(entries);
+                    renderRecentActivity(entries);
+                    setupTableSorting(entries);
+                    renderTable(entries);
+
+                    document
+                        .getElementById("search-box")
+                        ?.addEventListener("input", () => renderTable(entries));
+
+                    document
+                        .getElementById("region-filter")
+                        ?.addEventListener("change", () => renderTable(entries));
+
+                    document
+                        .getElementById("product-filter")
+                        ?.addEventListener("change", () => renderTable(entries));
+
+                } catch (error) {
+                    console.error("Unable to load report archive:", error);
+
+                    document.getElementById("products-body").innerHTML =
+                        "<tr><td colspan='6' class='empty'>Unable to load reports. Please refresh the page.</td></tr>";
+
+                    document.getElementById("recent-activity").innerHTML =
+                        "<p class='empty'>Unable to load recent activity.</p>";
+                }
             });
         </script>
     </body>
