@@ -127,14 +127,6 @@
                 color: #666;
             }
 
-            .recent-entry {
-                padding-bottom: 8px;
-                border-bottom: 1px solid #e5eaee;
-            }
-
-            .recent-entry:last-child {
-                border-bottom: none;
-            }
 
             .footer {
                 margin-top: 24px;
@@ -205,12 +197,6 @@
                 </p>
             </div>
 
-            <div id="recent-activity" aria-live="polite">
-                <p class="loading-message">
-                    <span class="loading-spinner" aria-hidden="true"></span>
-                    Loading recent activity…
-                </p>
-            </div>
 
             <div class="card">
                 <h2>Report Products</h2>
@@ -621,51 +607,6 @@
                     .join("");
             }
 
-            function renderRecentActivity(entries) {
-                const recent = document.getElementById("recent-activity");
-                if (!recent) return;
-
-                const now = new Date();
-
-                const twoDaysAgo = new Date(
-                    now.getTime() - 2 * 24 * 60 * 60 * 1000,
-                );
-
-                const recentEntries = entries
-                    .filter((item) => {
-                        const issuedTimestamp = getIssuedTimestamp(item);
-
-                        return (
-                            issuedTimestamp > 0 &&
-                            issuedTimestamp >= twoDaysAgo.getTime()
-                        );
-                    })
-                    .sort(
-                        (a, b) =>
-                            getIssuedTimestamp(b) - getIssuedTimestamp(a)
-                    );
-
-                if (recentEntries.length === 0) {
-                    recent.innerHTML =
-                        "<p class='empty'>No recent activity in the last 2 days.</p>";
-                    return;
-                }
-
-                recent.innerHTML = recentEntries
-                    .map((item) => {
-                        return `
-                        <div class="report-entry recent-entry">
-                          ${item.issuedLabel} •
-                          <a href="${item.url}" target="_blank">${item.burnName}</a>
-                          ${item.forest ? `• ${item.forest}` : ""}
-                          ${item.region ? `• ${item.region}` : ""}
-                          • ${item.product}
-                        </div>
-                        `;
-                    })
-                    .join("");
-            }
-
 
             document.addEventListener("DOMContentLoaded", async function () {
                 const archiveUrl =
@@ -689,7 +630,6 @@
                     const entries = data.reports;
 
                     populateRegionFilter(entries);
-                    renderRecentActivity(entries);
                     setupTableSorting(entries);
                     renderTable(entries);
 
@@ -710,9 +650,6 @@
 
                     document.getElementById("products-body").innerHTML =
                         "<tr><td colspan='6' class='empty'>Unable to load reports. Please refresh the page.</td></tr>";
-
-                    document.getElementById("recent-activity").innerHTML =
-                        "<p class='empty'>Unable to load recent activity.</p>";
                 }
             });
         </script>
