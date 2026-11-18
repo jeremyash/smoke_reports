@@ -143,6 +143,29 @@
                 font-weight: 800;
             }
 
+            /* Keep product badges sized to their text, including in mobile cards. */
+            #products-table .product-pill {
+                width: fit-content;
+                max-width: 100%;
+                flex: 0 0 auto;
+                align-self: flex-start;
+                box-sizing: border-box;
+            }
+
+            /* Desktop: keep the Product badge compact and aligned to the right. */
+            @media (min-width: 768px) {
+                #products-table tbody tr.report-row td[data-label="Product"] {
+                    text-align: right;
+                    white-space: nowrap;
+                }
+                #products-table tbody tr.report-row td[data-label="Product"] .product-pill {
+                    display: inline-block;
+                    width: auto;
+                    max-width: none;
+                    white-space: nowrap;
+                }
+            }
+
             .sr-pill {
                 background: #eaf1f5;
                 color: #032b5b !important;
@@ -183,6 +206,63 @@
                 border: 1px solid #b8c5cf;
                 border-radius: 6px;
                 padding: 8px;
+            }
+
+            /* Give select arrows breathing room on desktop and mobile. */
+            #region-filter,
+            #product-filter {
+                -webkit-appearance: none;
+                appearance: none;
+                padding-right: 34px;
+                background-color: white;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23526579' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                background-size: 12px 8px;
+            }
+
+            /* Mobile: display each report as a readable card instead of a wide table. */
+            @media (max-width: 767px) {
+                .container { padding: 12px; }
+                .card { padding: 16px 12px; }
+                #search-box { min-width: 0 !important; max-width: 100%; box-sizing: border-box; flex: 1 1 100%; }
+                #products-table, #products-table tbody { display: block; width: 100%; }
+                #products-table thead { display: none; }
+                #products-table tbody tr.report-row {
+                    display: block;
+                    margin: 0 0 12px;
+                    padding: 10px 12px;
+                    border: 1px solid #d8e0e6;
+                    border-left: 4px solid #f28c28;
+                    border-radius: 9px;
+                    background: #fff;
+                }
+                #products-table tbody tr.report-row td {
+                    display: flex;
+                    align-items: baseline;
+                    justify-content: space-between;
+                    gap: 12px;
+                    padding: 5px 0;
+                    border-bottom: 1px solid #edf1f4;
+                    overflow-wrap: anywhere;
+                }
+                #products-table tbody tr.report-row td:last-child { border-bottom: 0; }
+                #products-table tbody tr.report-row td::before {
+                    content: attr(data-label);
+                    color: #526579;
+                    font-size: 12px;
+                    font-weight: 700;
+                    flex: 0 0 82px;
+                }
+                #products-table tbody tr.report-row td[data-label="Burn Name"] a { font-size: 16px; }
+                #products-table tbody tr.report-row td > a,
+                #products-table tbody tr.report-row td > span { min-width: 0; }
+                #products-table tbody tr.report-row td[data-label="Product"] .product-pill {
+                    margin-left: auto;
+                }
+                #products-table tbody tr.report-row td[data-label="Forest"] { align-items: flex-start; }
+                #products-table tbody tr:not(.report-row) { display: block; }
+                #products-table tbody tr:not(.report-row) td { display: block; }
             }
         </style>
     </head>
@@ -269,139 +349,6 @@
                     </tbody>
                 </table>
 
-                <!-- hidden metadata stores -->
-
-                <div id="report-list" style="display: none">
-                    <!-- ===== BEGIN AUTO-GENERATED SMOKE REPORT LINKS ===== -->
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Chattahoochee-Oconee National Forests' data-burn-name='test' data-burn-date='2026-10-20' data-issued='2026-11-10T08:00:18' data-issued-label='2026-11-10 08:00 EST' data-url='sr/20261020-test-i0800.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Daniel Boone National Forest' data-burn-name='Gilbert Creek' data-burn-date='2026-11-10' data-issued='2026-11-10T06:57:59' data-issued-label='2026-11-10 06:57 EST' data-url='sr/20261110-gilbert-creek-i0657.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R04' data-forest='Caribou-Targhee National Forest' data-burn-name='r2_testing_again' data-burn-date='2026-10-20' data-issued='2026-11-09T17:03:08' data-issued-label='2026-11-09 17:03 EST' data-url='sr/20261020-r2-testing-again-i1703.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='National Forests in Mississippi' data-burn-name='r2_testing' data-burn-date='2026-10-20' data-issued='2026-11-09T16:58:29' data-issued-label='2026-11-09 16:58 EST' data-url='sr/20261020-r2-testing-i1658.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 2A' data-burn-date='2026-11-10' data-issued='2026-11-09T14:46:11' data-issued-label='2026-11-09 14:46 CST' data-url='sr/20261110-inagheh-2a-i1446.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Monongahela National Forest' data-burn-name='Upper John B' data-burn-date='2026-11-10' data-issued='2026-11-09T14:31:58' data-issued-label='2026-11-09 14:31 EST' data-url='sr/20261110-upper-john-b-i1431.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Daniel Boone National Forest' data-burn-name='Gilbert Creek' data-burn-date='2026-11-10' data-issued='2026-11-09T13:35:24' data-issued-label='2026-11-09 13:35 EST' data-url='sr/20261110-gilbert-creek-i1335.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Chattahoochee-Oconee National Forests' data-burn-name='new_github_func_test' data-burn-date='2026-10-20' data-issued='2026-11-09T11:17:12' data-issued-label='2026-11-09 11:17 EST' data-url='sr/20261020-new-github-func-test-i1117.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 1' data-burn-date='2026-11-09' data-issued='2026-11-09T07:49:53' data-issued-label='2026-11-09 07:49 CST' data-url='sr/20261109-inagheh-1-i0749.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 1' data-burn-date='2026-11-09' data-issued='2026-11-09T07:36:39' data-issued-label='2026-11-09 07:36 CST' data-url='sr/20261109-inagheh-1-i0736.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='github_deploy_test' data-burn-date='2026-10-20' data-issued='2026-11-08T21:09:53' data-issued-label='2026-11-08 21:09 EST' data-url='sr/20261020-github-deploy-test-i2109.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 1' data-burn-date='2026-11-09' data-issued='2026-11-08T19:28:06' data-issued-label='2026-11-08 19:28 CST' data-url='sr/20261109-inagheh-1-i1928.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 4 and 5' data-burn-date='2026-10-30' data-issued='2026-10-30T07:14:21' data-issued-label='2026-10-30 07:14 CDT' data-url='sr/20261030-inagheh-4-and-5-i0714.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 2A 2C' data-burn-date='2026-10-29' data-issued='2026-10-29T07:10:33' data-issued-label='2026-10-29 07:10 CDT' data-url='sr/20261029-inagheh-2a-2c-i0710.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 2A and 2C' data-burn-date='2026-10-29' data-issued='2026-10-28T19:07:12' data-issued-label='2026-10-28 19:07 CDT' data-url='sr/20261029-inagheh-2a-and-2c-i1907.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 1 and 2' data-burn-date='2026-10-28' data-issued='2026-10-28T07:20:11' data-issued-label='2026-10-28 07:20 CDT' data-url='sr/20261028-inagheh-1-and-2-i0720.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Shawnee National Forest' data-burn-name='Inagheh 1 and 2' data-burn-date='2026-10-28' data-issued='2026-10-27T16:00:26' data-issued-label='2026-10-27 16:00 CDT' data-url='sr/20261028-inagheh-1-and-2-i1600.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Ottawa National Forest' data-burn-name='Blueberry' data-burn-date='2026-10-22' data-issued='2026-10-22T08:22:31' data-issued-label='2026-10-22 08:22 EDT' data-url='sr/20261022-blueberry-i0822.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Ottawa National Forest' data-burn-name='Blueberry' data-burn-date='2026-10-22' data-issued='2026-10-21T12:48:54' data-issued-label='2026-10-21 12:48 EDT' data-url='sr/20261022-blueberry-i1248.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Daniel Boone National Forest' data-burn-name='testing gitupload' data-burn-date='2026-10-20' data-issued='2026-10-20T15:03:35' data-issued-label='2026-10-20 15:03 EDT' data-url='sr/20261020-testing-gitupload-i1503.html'></div>
-
-
-
-
-
-
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - Unit O' data-burn-date='2026-10-12' data-issued='2026-10-12T09:58:24' data-issued-label='2026-10-12 09:58 MDT' data-url='sr/20261012-harris-park-unit-o-i0958.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - Unit O' data-burn-date='2026-10-12' data-issued='2026-10-12T09:34:34' data-issued-label='2026-10-12 09:34 MDT' data-url='sr/20261012-harris-park-unit-o-i0934.html'></div>
-
-
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Rampart Res' data-burn-date='2026-10-08' data-issued='2026-10-07T13:57:54' data-issued-label='2026-10-07 13:57 MDT' data-url='sr/20261008-rampart-res-i1357.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Rampart Res' data-burn-date='2026-10-08' data-issued='2026-10-07T13:57:54' data-issued-label='2026-10-07 13:57 MDT' data-url='sr/20261008-rampart-res-i1357.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Rampart Res' data-burn-date='2026-10-07' data-issued='2026-10-07T13:45:36' data-issued-label='2026-10-07 13:45 MDT' data-url='sr/20261007-rampart-res-i1345.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Rampart Reservoir' data-burn-date='2026-10-07' data-issued='2026-10-07T13:43:03' data-issued-label='2026-10-07 13:43 MDT' data-url='sr/20261007-rampart-reservoir-i1343.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Bienville Comp 19,21' data-burn-date='2026-10-07' data-issued='2026-10-07T07:55:56' data-issued-label='2026-10-07 07:55 CDT' data-url='sr/20261007-bienville-comp-19-21-i0755.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Bienville Comp 19,21' data-burn-date='2026-10-07' data-issued='2026-10-07T07:52:43' data-issued-label='2026-10-07 07:52 CDT' data-url='sr/20261007-bienville-comp-19-21-i0752.html'></div>
-
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - LM' data-burn-date='2026-10-06' data-issued='2026-10-06T11:41:37' data-issued-label='2026-10-06 11:41 MDT' data-url='sr/20261006-harris-park-lm-i1141.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R02' data-forest='Pike and San Isabel National Forests' data-burn-name='Harris Park - LM' data-burn-date='2026-10-06' data-issued='2026-10-06T11:41:37' data-issued-label='2026-10-06 11:41 MDT' data-url='sr/20261006-harris-park-lm-i1141.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Bienville Comp 2, 3' data-burn-date='2026-10-01' data-issued='2026-10-01T08:43:35' data-issued-label='2026-10-01 08:43 CDT' data-url='sr/20261001-bienville-comp-2-3-i0843.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R09' data-forest='Hoosier National Forest' data-burn-name='Mill Creek' data-burn-date='2026-09-28' data-issued='2026-09-28T08:02:35' data-issued-label='2026-09-28 08:02 EDT' data-url='sr/20260928-mill-creek-i0802.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Compartment 280 Site Prep - 12 Acre' data-burn-date='2026-09-24' data-issued='2026-09-21T13:24:50' data-issued-label='2026-09-21 13:24 CDT' data-url='sr/20260924-compartment-280-site-prep-12-acre-i1324.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Compartment 280 Site Prep' data-burn-date='2026-09-24' data-issued='2026-09-21T13:05:48' data-issued-label='2026-09-21 13:05 CDT' data-url='sr/20260924-compartment-280-site-prep-i1305.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Compartment 280 Site Prep 42 Acres' data-burn-date='2026-09-24' data-issued='2026-09-21T12:47:54' data-issued-label='2026-09-21 12:47 CDT' data-url='sr/20260924-compartment-280-site-prep-42-acres-i1247.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Compartment 276 Site Prep' data-burn-date='2026-09-24' data-issued='2026-09-21T12:32:29' data-issued-label='2026-09-21 12:32 CDT' data-url='sr/20260924-compartment-276-site-prep-i1232.html'></div>
-
-    <div class='report-entry' data-product='Smoke Report' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Compartment 276 Site Prep' data-burn-date='2026-09-24' data-issued='2026-09-21T12:32:29' data-issued-label='2026-09-21 12:32 CDT' data-url='sr/20260924-compartment-276-site-prep-i1232.html'></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!-- ===== END AUTO-GENERATED SMOKE REPORT LINKS ===== -->
-                </div>
-
-                <div id="pb-list" style="display: none">
-                    <!-- ===== BEGIN AUTO-GENERATED PB PIEDMONT LINKS ===== -->
-
-
-
-
-
-
-
-
-    <div class='report-entry' data-product='PB Piedmont' data-region='R08' data-forest='Bienville National Forest' data-burn-name='Bienville Comp 19,21' data-burn-date='2026-10-07' data-issued='2026-10-07T07:52:43' data-issued-label='2026-10-07 07:52 CDT' data-url='pb/20261007-bienville-comp-19-21-i0752.html'></div>
-
-
-
-
-
-
-
-                    <!-- ===== END AUTO-GENERATED PB PIEDMONT LINKS ===== -->
-                </div>
-
-                <div id="mb-list" style="display: none">
-                    <p class="empty">
-                        No multi-burn exposure reports available yet.
-                    </p>
-
-                    <!-- ===== BEGIN AUTO-GENERATED MULTI-BURN EXPOSURE LINKS ===== -->
-                    <!-- ===== END AUTO-GENERATED MULTI-BURN EXPOSURE LINKS ===== -->
-                </div>
             </div>
 
             <div class="footer">
@@ -418,34 +365,6 @@
                 key: "issued",
                 direction: "desc",
             };
-
-            function getEntries(containerId, productLabel) {
-                const container = document.getElementById(containerId);
-                if (!container) return [];
-
-                return Array.from(
-                    container.querySelectorAll(".report-entry"),
-                ).map((entry) => {
-                    return {
-                        product: entry.dataset.product || productLabel,
-                        region: entry.dataset.region || "",
-                        forest: entry.dataset.forest || "",
-                        burnName: entry.dataset.burnName || "",
-                        burnDate: entry.dataset.burnDate || "",
-                        issued: entry.dataset.issued || "",
-                        issuedLabel: entry.dataset.issuedLabel || "",
-                        url: entry.dataset.url || "",
-                    };
-                });
-            }
-
-            function getAllEntries() {
-                return getEntries("report-list", "Smoke Report")
-                    .concat(getEntries("pb-list", "PB Piedmont"))
-                    .concat(
-                        getEntries("mb-list", "Multi-burn Exposure"),
-                    );
-            }
 
             function populateRegionFilter(entries) {
                 const filter = document.getElementById("region-filter");
@@ -588,15 +507,15 @@
                 body.innerHTML = filtered
                     .map((item) => {
                         return `
-                        <tr>
-                          <td>${item.issuedLabel}</td>
-                          <td>${item.burnDate}</td>
-                          <td>
-                            <a href="${item.url}" target="_blank">${item.burnName}</a>
+                        <tr class="report-row">
+                          <td data-label="Date Issued">${item.issuedLabel}</td>
+                          <td data-label="Burn Date">${item.burnDate}</td>
+                          <td data-label="Burn Name">
+                            <a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.burnName}</a>
                           </td>
-                          <td>${item.forest}</td>
-                          <td>${item.region}</td>
-                          <td>
+                          <td data-label="Forest">${item.forest}</td>
+                          <td data-label="Region">${item.region}</td>
+                          <td data-label="Product">
                             <span class="product-pill ${getProductPillClass(item.product)}">
                               ${item.product}
                             </span>
